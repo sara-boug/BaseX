@@ -1,14 +1,14 @@
 (:Let try to see how to count the number of meuseum in the   museums with a given name:)
-declare function local:museumCount( $db, $name)
+declare function local:treeCount( $db, $name)
  as xs:integer { 
 let $i := 0 
 let $result := fn:collection($db)
 let $x := count(for $r in $result 
-                where $r//museum/name= $name
+                where $r//trees/tree/kind= $name
                  return $r )
       return $x
 };
-(: Lets suppose we want to select all museums avaialable in the data :)
+(: Lets suppose we want to select all  the trees available in the data :)
 declare function local:select($db) {
   
    let $selection  := 
@@ -25,7 +25,7 @@ declare function local:simpleSelect($db) {
 };
 
 let $db := "XMLData" 
-let $sum := local:museumCount($db , "American Folk Art Museum")
+let $sum := local:treeCount($db , "Maclura")
 let $selection:= local:select($db)
 let $simple_selection := local:simpleSelect($db)
 return $simple_selection
